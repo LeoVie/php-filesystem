@@ -1,0 +1,9 @@
+parameters:
+# nothing to declare
+
+services:
+  LeoVie\PhpFilesystem\:
+    resource: '../src/'
+    exclude:
+      - '../src/DependencyInjection/'
+      - '../src/PhpFilesystemBundle.php'
