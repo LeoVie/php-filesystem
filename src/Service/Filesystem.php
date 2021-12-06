@@ -7,27 +7,15 @@ namespace LeoVie\PhpFilesystem\Service;
 use LeoVie\PhpFilesystem\Model\Boundaries;
 use Safe\Exceptions\FilesystemException;
 
-class Filesystem
+interface Filesystem
 {
-    public function fileExists(string $filepath): bool
-    {
-        return file_exists($filepath);
-    }
+    public function fileExists(string $filepath): bool;
 
     /** @throws FilesystemException */
-    public function readFile(string $filepath): string
-    {
-        return \Safe\file_get_contents($filepath);
-    }
+    public function readFile(string $filepath): string;
 
     /** @throws FilesystemException */
-    public function readFilePart(string $filepath, Boundaries $boundaries): string
-    {
-        return substr($this->readFile($filepath), $boundaries->start(), $boundaries->end() - $boundaries->start());
-    }
+    public function readFilePart(string $filepath, Boundaries $boundaries): string;
 
-    public function writeFile(string $filepath, string $content): int
-    {
-        return \Safe\file_put_contents($filepath, $content);
-    }
+    public function writeFile(string $filepath, string $content): int;
 }
