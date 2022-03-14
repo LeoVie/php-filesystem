@@ -7,6 +7,7 @@ namespace LeoVie\PhpFilesystem\Model;
 use LeoVie\PhpFilesystem\Exception\InvalidBoundaries;
 use Safe\Exceptions\StringsException;
 
+/** @psalm-immutable */
 class Boundaries
 {
     private function __construct(private int $start, private int $end)

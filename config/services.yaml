@@ -7,3 +7,7 @@ services:
     exclude:
       - '../src/DependencyInjection/'
       - '../src/PhpFilesystemBundle.php'
+
+  LeoVie\PhpFilesystem\Service\Filesystem:
+    alias: LeoVie\PhpFilesystem\Service\FilesystemService
+    public: true
