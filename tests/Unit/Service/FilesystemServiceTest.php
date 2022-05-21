@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LeoVie\PhpFilesystem\Tests\Unit\Service;
 
+use LeoVie\PhpFilesystem\Exception\DirectoryPathExistsAsFile;
 use LeoVie\PhpFilesystem\Model\Boundaries;
 use LeoVie\PhpFilesystem\Service\FilesystemService;
 use PHPUnit\Framework\TestCase;
@@ -87,5 +88,24 @@ class FilesystemServiceTest extends TestCase
                 'filepath' => self::NOT_EXISTING_FILE,
             ],
         ];
+    }
+
+    public function testMakeDirRecursiveThrows(): void
+    {
+        self::expectException(DirectoryPathExistsAsFile::class);
+
+        (new FilesystemService())->makeDirRecursive(self::TESTDATA_DIR, 'file');
+    }
+
+    public function testMakeDirRecursive(): void
+    {
+        if (is_dir(self::TESTDATA_DIR . '/directory')) {
+            \Safe\rmdir(self::TESTDATA_DIR . '/directory/subdirectory');
+            \Safe\rmdir(self::TESTDATA_DIR . '/directory');
+        }
+        self::assertDirectoryDoesNotExist(self::TESTDATA_DIR . '/directory');
+
+        (new FilesystemService())->makeDirRecursive(self::TESTDATA_DIR, 'directory/subdirectory');
+        self::assertDirectoryExists(self::TESTDATA_DIR . '/directory/subdirectory');
     }
 }
