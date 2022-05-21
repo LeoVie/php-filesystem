@@ -93,14 +93,17 @@ class FilesystemServiceTest extends TestCase
     public function testMakeDirRecursiveThrows(): void
     {
         self::expectException(DirectoryPathExistsAsFile::class);
+        self::expectExceptionMessage('Directory path "' . self::TESTDATA_DIR . '/file' . '" exists as file.');
 
         (new FilesystemService())->makeDirRecursive(self::TESTDATA_DIR, 'file');
     }
 
     public function testMakeDirRecursive(): void
     {
-        if (is_dir(self::TESTDATA_DIR . '/directory')) {
+        if (is_dir(self::TESTDATA_DIR . '/directory/subdirectory')) {
             \Safe\rmdir(self::TESTDATA_DIR . '/directory/subdirectory');
+        }
+        if (is_dir(self::TESTDATA_DIR . '/directory')) {
             \Safe\rmdir(self::TESTDATA_DIR . '/directory');
         }
         self::assertDirectoryDoesNotExist(self::TESTDATA_DIR . '/directory');
