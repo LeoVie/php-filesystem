@@ -24,15 +24,15 @@
         "symfony/config": "^6.0",
         "symfony/yaml": "^6.0",
         "symfony/http-kernel": "^6.0",
-        "thecodingmachine/safe": "^2.1",
-        "roave/security-advisories": "dev-latest"
+        "thecodingmachine/safe": "^2.1"
     },
     "require-dev": {
         "infection/infection": "^0.26",
         "vimeo/psalm": "^4.10",
         "psalm/plugin-symfony": "^3.0",
         "symfony/phpunit-bridge": "^6.0",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "roave/security-advisories": "dev-latest"
     },
     "scripts": {
         "psalm": "psalm -c build/config/psalm.xml --show-info=true",
